@@ -1,6 +1,6 @@
 # Mouse Innateness defined by transcriptomical gradient
 
-> Gabriel Ascui<sup>1,2,3 *</sup>, Viankail Cedillo-Castelan<sup>1 *</sup>, Alba Mendis<sup>1</sup>, Eleni Phung<sup>1</sup>, Hsin-Yu Liu<sup>1</sup>, Greet Verstichel<sup>1</sup>, Shilpi Chandra<sup>1</sup>, Mallory P. Murray<sup>1,3</sup>, Michael Croft<sup>1</sup>, Hilde Cheroutre<sup>1</sup>, Mitchell Kronenberg<sup>1</sup>.
+> Gabriel Ascui<sup>1,2,3 *</sup>, Viankail Cedillo-Castelan<sup>1 *</sup>, Alba Mendis<sup>1</sup>, Eleni Phung<sup>1</sup>, Hsin-Yu Liu<sup>1</sup>, Greet Verstichel<sup>1</sup>, Shilpi Chandra<sup>1</sup>, Mallory P. Murray<sup>1,3</sup>,  Hilde Cheroutre<sup>1</sup>, Mitchell Kronenberg<sup>1</sup>.
 
 <sup>1</sup> La Jolla Institute for Immunology, La Jolla, California, US; <sup>2</sup> University of California San Diego, La Jolla, California, US; <sup>3</sup> Immunological Genome Project Consortium.
 
@@ -16,7 +16,7 @@ Innate T cells, such as NKT cells, MAIT cells, &gamma;&delta; T cells and some i
 
 ## GitHub Repository
 
-This [repository](github.com/viancastelan/innateness) has all you will need to reproduce the results of Ascui & Cedillo-Castelan et al. 2023. 
+This [repository](github.com/vianCastelan/innateness_github) has all you will need to reproduce the results of Ascui & Cedillo-Castelan et al. 2023. 
 
 ## ImmGEN datasets
 
@@ -157,7 +157,7 @@ This script will ask for the following variables:
 
 ### ShinyApp
 
-We have deployed a ShinyApp here: <https://shinnyapp.io>.
+We have deployed a ShinyApp here: <https://innate.lji.org>.
 
 ### ATAC-seq motif enrichement: ChromVAR 
 
@@ -213,12 +213,14 @@ Running these will require some additional packages:
 
 ## Issues
 
-Please report any issues to gascui@lji.org or vcastelan@lji.org, or preferably using the Github issues tab here: <https://github.com/vcastelan/innateness>
+Please report any issues to gascui@lji.org or vcastelan@lji.org, or preferably using the Github issues tab here: <https://github.com/vianCastelan/innateness_github>
 
 ## Citation
 
+TBD
+
 ## Data
 
-<https://geo.ncbi.org> 
-
-<https://zenodo.org>
+Countmatrix for RNA-seq: GSE127267 <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE127267>
+ATAC-seq bigWig files: GSE100738 <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE100738>
+Western blot raw images: <https://doi.org/10.5281/zenodo.10472574>
