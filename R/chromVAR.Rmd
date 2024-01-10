@@ -1,0 +1,406 @@
+---
+title: "chromVAR"
+author: "Gabriel Ascui"
+date: '2022-07-08'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# chromVAR pipeline
+
+Applying chromVAR to ImmGen ATAC-seq dataset.
+
+## loading libraries and mouse genome from Biostrings.
+
+```{r libraries}
+#### libraries
+library(chromVAR)
+library(motifmatchr)
+library(Matrix)
+library(SummarizedExperiment)
+library(BiocParallel)
+library(TFBSTools)
+set.seed(2022)
+## extra libraries
+library(tidyverse)
+library(BSgenome.Mmusculus.UCSC.mm10)
+library(pheatmap)
+library(RColorBrewer)
+```
+
+make sure you have all libraries installed and you have 8 cores to run parallel processes.
+
+```{r options, echo=FALSE}
+### paralelize 
+register(MulticoreParam(8))
+```
+
+## Load data and metadata
+
+Make sure to have correct encoding for count table `.csv` file.
+
+```{r load data}
+## read data 
+counts <- read.csv(file = "data/countmatrix/ImmGen_ATACseq_count_table.csv", sep = ",", check.names = FALSE, encoding = 'cp1252')
+colnames(counts) <- gsub("\x96","", colnames(counts))
+head(counts)
+counts %>% select(contains("Sp")) %>% glimpse()
+## read metadata
+metadata <- read.csv(file = "data/metadata/ImmGen_ATACseq_metadata.csv", sep = ",", nrows = 16)
+```
+
+## Counts and Peaks
+
+```{r counts}
+## building new index : bed file with first column as chromosome, second as start, and third as end.
+## make in based on ImmGen_ATACseq_count_table.csv
+##
+index <- counts[,1:4] 
+index <- index[, c(2,3,4,1)]
+head(index)
+colnames(index) <- c("chr", "start", "end", "peakid")
+write.table(index, file = "new_index.bed", quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
+## read new index into peaks 
+peakfile = "new_index.bed"
+peaks <- getPeaks(peakfile, sort_peaks = TRUE, 
+                  extra_cols = setNames(4,"peakid")
+                  )
+## 
+## filter important samples by metadata
+counts_mtx <- counts %>% select(metadata$ID)
+## make usable object 
+counts_mtx <- as.matrix(counts_mtx)
+fragment_counts <- SummarizedExperiment(assays = list(counts = counts_mtx), 
+                                        colData = metadata,
+                                        rowRanges = peaks
+)
+## GC content of peaks 
+fragment_counts <- addGCBias(fragment_counts, genome = BSgenome.Mmusculus.UCSC.mm10)
+## filtering peaks 
+counts_filtered <- filterPeaks(fragment_counts, non_overlapping = TRUE)
+```
+
+## Motifs
+
+```{r motifs}
+motifs <- getJasparMotifs() ## default is CORE
+motif_ix <- matchMotifs(motifs, counts_filtered, 
+                        genome = BSgenome.Mmusculus.UCSC.mm10)
+## background peaks 
+bg <- getBackgroundPeaks(object = counts_filtered)
+## calculate deviation 
+dev <- computeDeviations(object = counts_filtered, annotations = motif_ix,
+                         background_peaks = bg)
+## variability 
+variability <- computeVariability(dev)
+
+```
+
+### plot variability
+
+```{r variability}
+plotVariability(variability, use_plotly = FALSE) 
+```
+
+### plot deviation
+
+```{r deviation}
+## visualizing deviation 
+tsne_results <- deviationsTsne(dev, threshold = 1.5, perplexity = 5)
+tsne_plots <- plotDeviationsTsne(dev, tsne_results, 
+                                 annotation_name = "FOS::JUN", 
+                                 sample_column = "cell_type", 
+                                 shiny = FALSE)
+tsne_plots[[1]]
+ggsave(last_plot(), filename = "output/figures/tsne_deviation_rmd.pdf")
+tsne_plots[[2]]
+ggsave(last_plot(), filename = "output/figures/tsne_deviation_FosJun_rmd.pdf")
+```
+
+### MORE STUFF
+
+```{r STUFF}
+## clustering 
+sample_cor <- getSampleCorrelation(dev)
+pheatmap(as.dist(sample_cor), 
+         annotation_col = as.data.frame(colData(dev))[,-c(1)],
+         clustering_distance_rows = as.dist(1-sample_cor),
+         clustering_distance_cols = as.dist(1-sample_cor), 
+         filename = "output/figures/distmtx_motifs.pdf",
+         width = 6,
+         height = 5
+         )
+## differential accessibility and variability 
+diff_acc <- differentialDeviations(dev, "cell_type")
+head(diff_acc)
+### tSNE for Motifs (not sure what this is useful for...)
+inv_tsne_results <- deviationsTsne(dev, threshold = 1.5, perplexity = 3, 
+                                   what = "annotations", shiny = FALSE)
+ggplot(inv_tsne_results, aes(x = Dim1, y = Dim2)) + geom_point() + 
+  chromVAR_theme()
+### Motif synergy
+msin <- getAnnotationSynergy(counts_filtered, motif_ix[,c(1,2,3)])
+msin
+## Motif 
+mcor <- getAnnotationCorrelation(counts_filtered, motif_ix[,c(1,2,3)])
+mcor
+```
+
+Some of the most differentially expressed are Nfil3, Foxf2, Foxd1, Irf2, and Mzf1.
+
+### differential expression of TFs motifs using deviation (z-scores)
+
+Using same analysis as in **Murray et al. 2021**.
+
+> *chromVAR computed deviation in ATAC-seq signal (Z-score) at regions containing indicated transcription factor motifs between the indicated cell populations from spleen and lung. Motifs with a p-value less than 1e-25 are shown and families and representative members are labeled.*
+
+```{r deviation_mtx}
+## here is the data that I need to make pheatmap
+dev_table <- as.data.frame(dev@assays@data@listData$z)
+## callback
+callback = function(hc, mat){
+    sv = svd(t(mat))$v[,1]
+    dend = reorder(as.dendrogram(hc), wts = sv)
+    as.hclust(dend)
+}
+## hclust for TFs row annotations 
+hclust <- hclust(dist(dev_table[diff_acc$p_value_adjusted < 0.05,]), method = "complete")
+tf_col <- cutree(tree = hclust, k = 6) ## 6 clusters, one for each cell_type
+tf_col <- data.frame(cluster = ifelse(tf_col == 1, "c1",
+                                      ifelse(tf_col == 2, "c2", 
+                                             ifelse(tf_col == 3, "c3",
+                                                    ifelse(tf_col == 4, "c4",
+                                                           ifelse(tf_col == 5, "c5", "c6"))))))
+## metadata for celltype column annotations 
+cell_row <- data.frame(row.names = metadata$ID, metadata$cell_type)
+cell_row$metadata.cell_type <- factor(cell_row$metadata.cell_type, levels = c("NK","NKT","Tgd","CD8","CD4"))
+cell_row <- arrange(cell_row, metadata.cell_type)
+## reorder by cell_type
+dev_table <- dev_table[,rownames(cell_row)]
+## add metadata to each motif
+mlist <- motifs@listData[names(motifs)]
+mlist <- lapply(mlist, function(x) slot(x, "tags"))
+motifs_df <- map_dfr(mlist, ~as_tibble(t(.)))
+rownames(motifs_df) <- names(mlist)
+motifs_big <- cbind(dev_table,motifs_df, diff_acc) #row.names(dev_table) == row.names(motifs_df)
+### only TFs with high sd values ? 
+#hist(rowSds(as.matrix(dev_table)))
+#table(unlist(motifs_big$family))
+tf_col$family <- motifs_big[diff_acc$p_value_adjusted < 0.05,]$family
+tf_col$family <- as.data.frame(do.call(rbind,tf_col$family))[1]
+tf_col$family <- tf_col$family$V1
+#tf_col$family <- gsub("[^ -~]","u",tf_col$family) ## offending character
+tf_col$family <- gsub("[^[:alnum:] ]", " ", tf_col$family)
+```
+
+Make `pheatmap` for all motifs.
+
+```{r pheatmap, fig.height=15, fig.width=8}
+## plot
+pheatmap(-dev_table[diff_acc$p_value_adjusted < 0.05,], ## filter significant differential deviation
+         color = colorRampPalette(rev(brewer.pal(9,"RdBu")))(255),
+         border_color = NA,
+         cellheight = 8, cellwidth = 14,
+         width = 20, height = 25,
+         annotation_row = tf_col,
+         annotation_col = cell_row,
+         clustering_callback = callback,
+         cluster_cols = FALSE,
+         #filename = "motifs_heatmap.pdf",
+         cutree_rows = 6,
+         gaps_col = c(6,8,10,12)
+         )
+## make pdf file 
+pheatmap(-dev_table[diff_acc$p_value_adjusted < 0.05,], ## filter significant differential deviation
+         color = colorRampPalette(rev(brewer.pal(9,"RdBu")))(255),
+         border_color = NA,
+         cellheight = 8, cellwidth = 14,
+         width = 20, height = 25,
+         annotation_row = tf_col,
+         annotation_col = cell_row,
+         clustering_callback = callback,
+         cluster_cols = FALSE,
+         filename = "output/figures/motifs_heatmap_init.pdf",
+         cutree_rows = 6,
+         gaps_col = c(6,8,10,12)
+         )  
+```
+
+Need to do new `pheatmap` with averages per cell type. 
+
+```{r group_heatmap, fig.height=15, fig.width=8}
+
+mlist <- list()
+for(l in levels(cell_row$metadata.cell_type)) {
+  mlist[[l]] <- rowSums(dev_table[,rownames(cell_row)[cell_row$metadata.cell_type==l]]) / length(rownames(cell_row)[cell_row$metadata.cell_type==l])
+}
+mdf <- as.data.frame(mlist)
+
+mdf[tf_col$family=="TBX2 related factors",]
+ 
+
+
+```
+
+#### Get new family of TFs
+
+Make `pheatmap` with group of family of TFs motifs.
+
+Data from **Lambert SA, Jolma A, Campitelli LF, Das PK, Yin Y, Albu M, Chen X, Taipale J, Hughes TR, Weirauch MT.(2018) The Human Transcription Factors. Cell. 172(4):650-665. doi: 10.1016/j.cell.2018.01.029. Review.**
+
+```{r load_family, fig.height=8, fig.width=6}
+
+## http://humantfs.ccbr.utoronto.ca/download.php
+## Lambert SA, Jolma A, Campitelli LF, Das PK, Yin Y, Albu M, Chen X, Taipale J, Hughes TR, Weirauch MT.(2018) The Human Transcription Factors. Cell. 172(4):650-665. doi: 10.1016/j.cell.2018.01.029. Review.
+tf_dbd <- read.table("data/motifs/DatabaseExtract_v_1.01.csv", sep = ",", header = TRUE, fill = TRUE)
+## only going to take first TF and only var 1 
+tf <- gsub("::.*","", gsub("\\(var\\.\\d\\)","", gsub(".*_","",rownames(mdf))))
+tf_f <- data.frame(symbol = tf)
+tf_f <- merge(tf_dbd[tf_dbd$HGNC.symbol %in% tf_f$symbol,][c("HGNC.symbol","DBD")],
+              tf_f, 
+              by.x = "HGNC.symbol", 
+              by.y = "symbol")
+tf_f <- tf_f[match(tf,tf_f$HGNC.symbol),]
+rownames(tf_f) <- rownames(mdf)
+#tf_f <- tf_f[rownames(tf_f) %in% rownames(tf_col),]
+tf_col <- tf_f
+tf_col$family <- tf_col$DBD
+## combine small categories
+tf_col$family <- ifelse(tf_col$family == "C2H2 ZF","Zinc Finger",
+                        ifelse(tf_col$family == "BED ZF", "Zinc Finger", 
+                                ifelse(tf_col$family == "Ets; AT hook", "Ets", 
+                                       ifelse(tf_col$family == "CUT; Homeodomain", "Homeodomain", 
+                                              ifelse(tf_col$family == "Homeodomain; POU","Homeodomain",
+                                              tf_col$family)
+                                ))))
+## make new colors (21)
+# library(Polychrome)
+# Glasbey = glasbey.colors(length(unique(tf_col$family)))
+# mycolors <- Glasbey
+# names(mycolors) <- unique(tf_col$family)
+# mycolors <- list(family = mycolors)
+```
+
+New Pheatmap: 
+
+```{r}
+pheatmap(-dev_table[diff_acc$p_value_adjusted < 0.05,], ## filter significant differential deviation
+         color = colorRampPalette(rev(brewer.pal(9,"RdBu")))(255),
+         border_color = NA,
+         cellheight = 8, cellwidth = 14,
+         width = 20, height = 25,
+         annotation_row = tf_col,
+         #annotation_colors = mycolors,
+         annotation_col = cell_row,
+         clustering_callback = callback,
+         cluster_cols = FALSE,
+         #filename = "output/figures/motifs_heatmap.pdf",
+         cutree_rows = 6,
+         gaps_col = c(6,8,10,12)
+         )
+```
+
+Now separate by family: 
+
+```{r}
+## function to run everything
+motif_plot <- function(df,fam, sig = TRUE) {
+  tryCatch({
+    if (length(fam) > 1){
+      print("many families")
+      if (sig) {
+        df <- df[diff_acc$p_value_adjusted < 0.05 & tf_col$family %in% fam,]
+      } else {
+        df <- df[tf_col$family %in% fam,]
+      }
+    } else {
+      df <- df[diff_acc$p_value_adjusted < 0.05 & ifelse(is.na(tf_col$family == fam),FALSE,tf_col$family == fam),]
+    }
+    pheatmap(-df, ## filter significant differential deviation
+          color = colorRampPalette(rev(brewer.pal(9,"RdBu")))(255),
+          border_color = NA,
+          cellheight = 8, cellwidth = 14,
+          width = 20, height = 25,
+          annotation_row = tf_col,
+          #annotation_colors = mycolors,
+          annotation_col = cell_row,
+          clustering_callback = callback,
+          cluster_cols = FALSE,
+          #cutree_rows = 6,
+          filename = paste0("output/figures/",paste0(fam),"_heatmap",".pdf"),
+          gaps_col = c(6,8,10,12)
+          )
+  }, error=function(e){cat("ERROR :", conditionMessage(e),"\n")})
+}
+
+## loop per families of interest
+fam_loop <- c("T-box","bHLH","Ets","Zinc Finger")
+plist <- list()
+for (f in fam_loop) {
+  plist[[f]] <- motif_plot(dev_table,f)
+}
+others <- c(
+  "AP-2",
+  "Rel",
+  "SMAD"
+)
+plist[["others"]] <- motif_plot(dev_table,others)
+
+plist
+
+
+```
+
+
+
+Try to loop these: 
+
+```{r}
+# loop
+## pheatmap
+# for (f in names(table(tf_col)[table(tf_col) > 2])) {
+#   tryCatch({
+#     pheatmap(-mdf[diff_acc$p_value_adjusted < 0.05 & ifelse(is.na(tf_col$family == f),FALSE,tf_col$family == f),], 
+#          cluster_cols = FALSE, 
+#          #cutree_rows = if (dim(-mdf[diff_acc$p_value_adjusted < 0.05 & ifelse(is.na(tf_col$family == f),FALSE,tf_col$family == f),])[1] < 2) 1 else 6, 
+#          clustering_callback = callback, 
+#          #cluster_rows = FALSE,
+#          cluster_rows = if (dim(-mdf[diff_acc$p_value_adjusted < 0.05 & ifelse(is.na(tf_col$family == f),FALSE,tf_col$family == f),])[1] < 2) FALSE else TRUE,
+#          #annotation_row = tf_col, 
+#          #labels_row = tf_f$HGNC.symbol
+#          filename = paste0(f,"_heatmap",".pdf")
+#          )
+#   }, error=function(e){cat("ERROR :", conditionMessage(e),"\n")})
+# }
+
+```
+
+Try same for individual samples
+
+```{r devtable_loop}
+
+### loop 
+# for (f in names(table(tf_col)[table(tf_col) > 2])) {
+#   tryCatch({
+#     pheatmap(-dev_table[diff_acc$p_value_adjusted < 0.05 & ifelse(is.na(tf_col$family == f),FALSE,tf_col$family == f),], 
+#          cluster_cols = FALSE, 
+#          #cutree_rows = if (dim(-mdf[diff_acc$p_value_adjusted < 0.05 & ifelse(is.na(tf_col$family == f),FALSE,tf_col$family == f),])[1] < 2) 1 else 6, 
+#          clustering_callback = callback, 
+#          #cluster_rows = FALSE,
+#          cluster_rows = if (dim(-mdf[diff_acc$p_value_adjusted < 0.05 & ifelse(is.na(tf_col$family == f),FALSE,tf_col$family == f),])[1] < 2) FALSE else TRUE,
+#          #annotation_row = tf_col, 
+#          #labels_row = tf_f$HGNC.symbol
+#          filename = paste0(f,"_all_heatmap",".pdf")
+#          )
+#   }, error=function(e){cat("ERROR :", conditionMessage(e),"\n")})
+# }
+```
+ 
+#### Session Info
+
+```{r SessionInfo}
+sessionInfo()
+```

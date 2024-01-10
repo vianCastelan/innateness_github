@@ -1,0 +1,166 @@
+---
+title: "Track plots"
+author: "Gabriel Ascui"
+date: '2023-04-30'
+output: html_document
+---
+
+
+### Tracks for specific TFs
+
+We need to find a relative location of the promoter. To do so, we will find TSS for specific genes using UCSC table for TSS location per each gene. NOTE: This table does not have `chromosome_name` information. Next, we will evaluate the sequence with `5000` bp upwards and downwards of the TSS. We will obtain information of the chromosome by using `biomaRt`. 
+
+First we need to generate a list of regulatory objects close to gene of interest. 
+
+>> Load UCSC libraries & `biomaRt`
+
+Use `BiomaRt` to retrieve ENSMUST00000 code to location in genome
+
+```{r UCSC_ENSEMBL_lib}
+## TSS location per each gene (grep for specific gene) according to UCSC
+ucscGenesActive <- read.table("Mm_ucscTSS_mm10.sga", as.is=T, sep="\t", header=F) ### TSS location
+## load biomaRt
+library(biomaRt)
+## connect to mart for transcripts and for regulatory elements 
+mart <- useMart("ENSEMBL_MART_ENSEMBL", dataset = "mmusculus_gene_ensembl") ## this takes time 
+mart_reg <- useMart("ENSEMBL_MART_FUNCGEN", dataset = "mmusculus_regulatory_feature") ## mmusculus_regulatory_feature
+# listMarts() ## ENSEMBL_MART_FUNCGEN
+# listDatasets(mart_reg)  ## mmusculus_regulatory_feature
+# listAttributes(mart_reg)
+## read GFF 
+# V1 is chromosome_name
+# V2 is library 
+# V3 is feature_type_name
+# V9 is summary with ID (grep ID) with ENSMUSR code 
+encode_gff <- read.delim("data/mus_musculus.GRCm39.Regulatory_Build.regulatory_features.20201021.gff", header=F, comment.char="#")
+
+```
+
+> There are other libraries and SQL files we can use, but we will stick with ENSEMBL.
+
+```{r expired_code, include=FALSE}
+## TSS location according to EDP https://epd.epfl.ch/
+#epd_mm10 <- read.table("ftp://ccg.epfl.ch/epdnew//M_musculus/003/Mm_EPDnew_003_mm10.sga", as.is = TRUE, sep = "\t", header = FALSE)
+#epd_mm10[grep("Tbx21", x = epd_mm10$V6),] ## 
+
+## promoter coordinates 
+#epd_coord_mm10 <- read.table("ftp://ccg.epfl.ch/epdnew//M_musculus/003/db/promoter_coordinate.txt", as.is = TRUE, sep = "\t", header = FALSE)
+#epd_coord_mm10[grep("Zeb2_", x = epd_coord_mm10$V1),]
+
+## promoter sequence
+#epd_seq_mm10 <- read.table("ftp://ccg.epfl.ch/epdnew//M_musculus/003/db/promoter_sequence.txt", as.is = TRUE, sep = "\t", header = FALSE)
+#epd_seq_mm10[grep("Tbx21", x = epd_seq_mm10$V1),] ### 97006147-97006206
+### re-mapping 
+#remapping <- read.delim("https://ftp.ncbi.nlm.nih.gov/pub/remap/Mus_musculus/3.0/GCF_000001635.27_GRCm39/GCF_000001635.20_GRCm38/GCF_000001635.27-GCF_000001635.20.gff", header = FALSE, comment.char = "#")
+```
+
+Actual code:
+
+```{r find_TSS_Regulation_regions}
+gene = "Tbx21"
+## find TSS
+ucscGenesActive[grep(gene, x = ucscGenesActive$V6),] ## V3 has the TSS location V6 has transcript ID for ensembl 
+gene_id <- gsub("\\.\\..*","",  ucscGenesActive[grep(gene, x = ucscGenesActive$V6),]$V6 )
+## find chrmosome_name and relative location of gene 
+mart_results <- getBM(filters= "ensembl_transcript_id", 
+                attributes= c("ensembl_transcript_id",
+                              "ensembl_gene_id",
+                              "mgi_symbol", 
+                              "chromosome_name", 
+                              "strand",  
+                              "start_position", 
+                              "end_position"),
+                values=gene_id,
+                mart= mart)
+#mart_results
+gene_results <- data.frame(
+  gene_symbol = mart_results$mgi_symbol,
+  ensembl_gene_id = mart_results$ensembl_gene_id,
+  tss_location = ucscGenesActive[grep(gene, x = ucscGenesActive$V6),]$V3,
+  chromosome_name = mart_results$chromosome_name,
+  strand = mart_results$strand,
+  start_position = mart_results$start_position,
+  end_position = mart_results$end_position
+)
+#encode_gff[grep("ENSMUSR00000784626",encode_gff$V9),]
+#head(encode_gff)  ## V9 has ID=open_chromatin_region:ENSMUSR
+#table(encode_gff$V1)
+### final table 
+reg_regions <- encode_gff[encode_gff$V1 == gene_results$chromosome_name & encode_gff$V4 > gene_results$start_position & encode_gff$V5 < gene_results$end_position+10000,]
+reg_regions
+```
+
+Use `gene_results` and `reg_regions` to generate trackplots() accordingly for each cell type ATAC-seq data in bigWig files. 
+
+
+```{r trackplots_prep}
+source("trackplot.R")
+# brew install mysql
+# install perl requirements 
+#
+## Pohl A, Beato M. bwtool: a tool for bigWig files. Bioinformatics. 2014 Jun 1;30(11):1618-9. doi: 10.1093/bioinformatics/btu056. Epub 2014 Jan 30. PMID: 24489365; PMCID: PMC4029031.
+#Path to bigWig files
+bigWigs = c("/data/bigwig/GSE100738_NK.27-11b+.Sp.bw",
+            "/data/bigwiga/GSE100738_NKT.Sp.bw",
+            "/data/bigwig/GSE100738_Tgd.Sp.bw",
+            "/data/bigwig/GSE100738_T.8.Nve.Sp.bw",
+            "/data/bigwig/GSE100738_T.4.Nve.Sp.bw"
+            )
+# Extract the signal for your loci of interest ## T-bet on chr11:97,020,000-96,985,000
+track_data = track_extract(bigWigs = bigWigs,
+                           loci = paste0("chr",
+                                         gene_results$chromosome_name,
+                                         ":",
+                                         if(gene_results$strand == -1) { 
+                                           paste(gene_results$start_position)
+                                           } else {
+                                             paste(gene_results$start_position+10000)},
+                                         "-",
+                                         if(gene_results$strand == -1) { 
+                                           paste(gene_results$end_position+10000)
+                                           } else {
+                                             paste(gene_results$end_position)}))# "chr11:97,000,897-97,020,157"
+### add names to each dataset. 
+track_data = track_summarize(summary_list = track_data, condition = c("1 NK cells", "2 NKT cells", "3 gd T cells", "4 CD8 T cells", "5 CD4 T cells"), stat = "mean")
+#Basic Plot 
+#track_plot(summary_list = track_data, build = "mm39")
+## Highlight regions of interest
+markregions <- reg_regions
+colnames(markregions)[c(3,4,5)] <- c("name","start","end")
+markregions$chr <- paste0("chr",markregions$V1)
+markregions %>% dplyr::select(chr, start,end,name) -> markregions
+markregions
+```
+
+
+```{r trackplot, error=FALSE}
+
+## run track plot 
+track_plot(
+  summary_list = track_data,
+  draw_gene_track = TRUE,
+  #show_ideogram = TRUE,
+  build = "mm39",
+  regions = markregions,
+  boxcol = "#BEC446",
+  genename = gene_results$gene_symbol
+)
+
+```
+
+```{r trackplot_pdf, error=FALSE, include=FALSE, message=FALSE}
+
+## run track plot 
+pdf("trackplot_feats.pdf")
+track_plot(
+  summary_list = track_data,
+  draw_gene_track = TRUE,
+  #show_ideogram = TRUE,
+  build = "mm39",
+  regions = markregions,
+  boxcol = "#BEC446",
+  genename = gene_results$gene_symbol
+)
+dev.off()
+```
+

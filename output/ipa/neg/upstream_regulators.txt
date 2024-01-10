@@ -1,0 +1,120 @@
+© 2000-2021 QIAGEN. All rights reserved.
+
+Upstream Regulator	Expr Fold Change	Molecule Type	Predicted Activation State	Activation z-score	Flags	p-value of overlap	Target Molecules in Dataset	Mechanistic Network
+GFI1	 	transcription regulator	Inhibited	-3.768	bias	4.98E-11	BTLA,CCND2,CCR7,CD53,CFLAR,FOXO1,GPR183,HDAC4,Iigp1,IKBKB,IL6R,IL7R,ITGB7,Ly6a (includes others),NLRC5,RAPGEF4,RASGRP1,S1PR1,STAT1,TNFRSF25	 
+Tcf7	71.265	transcription regulator	 	-1.398	 	2.59E-10	BCL11B,CCR9,CD3E,CD4,CD69,CNR2,DTX1,ETNK1,FAAH,GM2A,ID3,IFT80,IL21R,IL27RA,IL7R,IZUMO1R,LEF1,PECAM1,SELL,SGMS1,SOCS3,SPTSSA,SREBF2,STAT1,TLR1,TOX,ZC3H12D	 
+ID2	 	transcription regulator	 	0.905	 	2.40E-09	CCND2,CCR7,CCR9,CXCR6,DGKA,DTX1,FOXO1,Foxp1,IFNGR2,IGFBP4,IKZF2,IL4R,IL6R,IL7R,LTB,PIK3IP1,RAPGEF4,SELL,SLAMF6,SOCS3,Tcf7,TNFRSF25,TNFSF8	 
+ID3	26.537	transcription regulator	 	1.667	 	1.11E-08	CCND2,CCR7,CCR9,CXCR6,DGKA,DTX1,FOXO1,Foxp1,IFNGR2,IGFBP4,IKZF2,IL4R,IL6R,IL7R,LTB,PIK3IP1,RAPGEF4,SELL,SLAMF6,SOCS3,TNFRSF25,TNFSF8	 
+TCF3	 	transcription regulator	 	1.327	bias	1.19E-08	ASB2,CD3D,CD3G,CXCR6,EDEM1,HCST,ID3,IFI16,IGHM,ITGB7,KCNN4,LCK,LEF1,Ly6a (includes others),S1PR1,SELENOP,SELL,SPCS2,STK17B,TENT5C,TLR1,TNFRSF25,VSIR	 
+IL10RA	 	transmembrane receptor	Inhibited	-4.424	 	1.22E-08	ABCG1,Art2b,CCR7,CD69,ENTPD5,GBP2,GBP6,IFI16,Ifi47,Iigp1,IKBKE,IL2RG,Irgm1,ITGB7,Ly6a (includes others),NLRC5,PARVG,PSMB8,RNF213,S1PR1,SAMHD1,SELL,SLAMF6,Slfn1,STAT1,TAP1,TAP2	 
+TCF12	 	transcription regulator	 	-1.155	bias	3.96E-08	ASB2,CD3D,CD3G,CXCR6,ID3,ITGB7,LCK,Ly6a (includes others),S1PR1,STK17B,TLR1,TNFRSF25	 
+IL2RG	18.229	transmembrane receptor	Inhibited	-2.333	bias	6.63E-08	ABCG1,ARHGAP45,IGHM,IKBKE,IL7R,LTB,MAP4K2,NPC2,RHOH,UBA7	 
+STAT6	 	transcription regulator	Inhibited	-2.628	 	2.66E-07	Acp5,AKAP13,CCND2,CCR7,CD69,Cmah,CNR2,DGKA,GBP2,GBP6,IFI16,IFIT1B,Igtp,Iigp1,IL4R,IRF9,Irgm1,ITGB7,LCP2,LTB,Ly6a (includes others),RNF213,ST6GAL1,STAT5B,Tcf7	29 (2)
+NFAT5	 	transcription regulator	Inhibited	-2.333	bias	4.69E-07	Art2b,CD74,DAXX,IFI16,IFIT1B,Iigp1,Irgm1,Slfn1,STAT1	16 (2)
+PTGER4	 	G-protein coupled receptor	 	-1.695	bias	6.60E-07	CD69,DAXX,GBP2,GBP6,IFI16,Ifi47,IFIT1B,Igtp,Irgm1,LPAR6,RASSF2,RNF213,RTP4,S1PR1,ST6GAL1,TP53INP1	 
+SMARCA5	 	transcription regulator	 	-1.861	bias	1.90E-06	CAMK4,CCND2,CD53,DTX1,GBP6,GM2A,IGFBP4,IL7R,KBTBD11,LPAR6,Ly6a (includes others),NLRC5,RTP4,THEMIS,TSPAN32	 
+LDB1	 	transcription regulator	 	-0.408	 	2.00E-06	CCND2,CD247,CD3E,CD3G,CD53,DPP4,GPR183,Iigp1,ITGB7,ITM2C,LCK,LEF1,MGST2,NLRC5,NSG2,OXCT1,PIK3CD,RASGRP1,RHOH,SLC16A5,ST6GALNAC3,TAP1,Tcf7,UBASH3A	 
+IRF3	 	transcription regulator	Activated	3.576	bias	3.18E-06	BTLA,CD69,DAXX,IFI16,Ifi27l2a/Ifi27l2b,Ifi47,IFIT1B,Igtp,Irgm1,NLRC5,Slfn1,STAT1,TAP1	 
+IRF7	 	transcription regulator	Activated	3.130	bias	4.78E-06	CD69,DAXX,IFI16,Ifi47,Igtp,Irgm1,Ly6a (includes others),Slfn1,STAT1,TAP1	 
+ETS1	64.573	transcription regulator	Activated	2.332	bias	5.61E-06	CD27,HCST,IKZF2,IL7R,ITK,LCK,LTB,SLAMF6,ZAP70	 
+ZBTB16	 	transcription regulator	 	-0.753	 	9.40E-06	CD74,CXCR6,ID3,IL21R,IL4R,IL6ST,Ly6a (includes others),SELL,SLAMF6,TNFRSF25,TNFSF8,TSC22D3	 
+MED1	 	transcription regulator	 	 	 	9.46E-06	ARID1A,FOXO1,Foxp1,KLF13,LEF1,Tcf7	 
+EP300	 	transcription regulator	 	 	 	9.46E-06	BCLAF1,CAMK4,CCR7,CD53,CKB,DTX1,GIMAP1-GIMAP5,GM2A,GRAMD2B,IFIT1B,IL7R,ITGB7,RAPGEF4,RTP4,SLAMF6,SOCS3,ST6GAL1,UTRN,XIST	 
+IFNB1	 	cytokine	 	 	 	2.88E-05	DAXX,GBP2,GBP6,IFI16,Ifi27l2a/Ifi27l2b,Ifi47,IFIT1B,Igtp,Irgm1,MGST2,Nisch,SIDT1,STAT1,XIST	21 (2)
+SOCS1	 	other	Inhibited	-2.008	bias	4.08E-05	CCR7,CD69,GBP6,IFI16,Ifi47,IFIT1B,Iigp1,SOCS3,STAT1	36 (4)
+CREBBP	 	transcription regulator	 	 	 	7.12E-05	CAMK4,CCR7,CD53,CKB,DTX1,GIMAP1-GIMAP5,GM2A,GRAMD2B,IFIT1B,IL7R,ITGB7,RAPGEF4,RTP4,SLAMF6,SOCS3,ST6GAL1,UTRN,XIST	 
+FOXP3	 	transcription regulator	 	 	 	7.69E-05	CCR7,CD226,CD69,CXCR6,GBP2,IFNGR2,IGFBP4,IKZF2,IL6R,IL7R,IZUMO1R,TNFSF8,VIPR1	 
+LCK	17.463	kinase	Activated	2.646	bias	8.28E-05	CD5,CD69,DKC1,EMG1,PIK3CD,RPL4,TCOF1	 
+LEPR	 	transmembrane receptor	 	0.788	 	9.18E-05	ABCG1,CD5,DNAJC7,FYB1,PSMB8,STK17B,TP53INP1,TSC22D3	 
+IL4	 	cytokine	 	1.132	bias	1.01E-04	Acp5,B4GALNT1,CCND2,CCR7,CCT3,CD69,Cmah,CNR2,DGKA,GBP2,GIMAP1-GIMAP5,IL27RA,IL4R,IL7R,ITGB7,LTB,PDK1,RPS6,SOCS3,Tcf7,TP53	48 (5)
+TLR4	 	transmembrane receptor	Activated	2.961	bias	1.04E-04	CCND2,CFLAR,DAXX,HNRNPU,IFI16,Ifi47,IFIT1B,Igtp,Iigp1,Irgm1,PELI1,RGCC,SH3BP5,SOCS3,STAT1,TNFSF8	48 (6)
+ZC3H12C	 	other	Inhibited	-2.200	bias	1.06E-04	GBP2,GBP6,Igtp,Iigp1,Ly6a (includes others)	 
+STAT3	 	transcription regulator	Inhibited	-2.714	bias	1.30E-04	CCND2,CD226,DPP4,GBP6,IFI16,IFIT1,IFIT1B,Igtp,IKZF2,Irgm1,SOCS3,TAP1	27 (3)
+FOXO1	11.478	transcription regulator	Activated	2.405	bias	1.62E-04	ATP5F1B,ATP6V1D,CCR7,FOXO1,IKZF2,IL7R,S1PR1,SELL,STAT5B,Tcf7	 
+SPI1	 	transcription regulator	 	 	 	1.74E-04	ARID1A,CD3E,FOXO1,Foxp1,IFIT1B,KLF13,LEF1	 
+BHLHE40	 	transcription regulator	Inhibited	-3.162	 	2.24E-04	Cmah,IFI16,IL6R,IL6ST,IPCEF1,IZUMO1R,LEF1,SELL,SLAMF6,Tcf7	 
+SAMSN1	 	other	Activated	3.162	bias	2.75E-04	CCND2,DAXX,IFIT1B,Iigp1,PELI1,RGCC,SH3BP5,SOCS3,STAT1,TNFSF8	 
+MXD1	 	transcription regulator	Inhibited	-3.000	bias	2.97E-04	BTLA,COX7A2L,IDH2,MYBBP1A,NDUFA10,NOP56,RPL3,RPS2,RPSA	 
+TICAM1	 	other	Activated	3.264	bias	4.45E-04	CFLAR,IFI16,Ifi47,IFIT1B,Igtp,IKBKE,Irgm1,PDE4B,PELI1,SAMHD1,SOCS3	30 (4)
+CBFB	 	transcription regulator	 	1.414	 	4.83E-04	ARL4C,CD4,GIMAP1-GIMAP5,IFT80,IKZF2,IZUMO1R,RAB3IP,TGFBR2	 
+YY1	 	transcription regulator	 	 	 	5.43E-04	ABCE1,BTLA,EEF1B2,ID3,MAT2A,SLC25A4,SRSF1,TP53	 
+PDPK1	 	kinase	 	 	 	6.04E-04	CCR7,S1PR1,SELL	10 (2)
+STAT1	27.610	transcription regulator	Activated	2.387	bias	6.09E-04	CCR7,GBP2,IFIT1B,Ly6a (includes others),PECAM1,PSME1,PSME2,SOCS3	 
+TBX21	 	transcription regulator	Inhibited	-2.433	 	6.48E-04	IL6R,IL6ST,IL7R,SELL,Tcf7,TGFBR2	 
+IFNG	 	cytokine	Activated	3.336	bias	7.42E-04	CCND2,CD74,GBP2,HLA-DOB,IL7R,Irgm1,LTB,Ly6a (includes others),PECAM1,PRKCQ,RBCK1,Slfn1,SOCS3,STAT1,TAP1,TP53	27 (3)
+TCF4	 	transcription regulator	Activated	3.162	bias	1.13E-03	EDEM1,HCST,ID3,IFI16,KCNN4,Ly6a (includes others),SELENOP,SELL,SPCS2,TENT5C,VSIR	 
+DOCK8	 	other	Activated	2.828	bias	1.16E-03	CCND2,DAXX,IFIT1B,Iigp1,PELI1,SH3BP5,STAT1,TNFSF8	 
+NFKB2	 	transcription regulator	Activated	2.000	bias	1.38E-03	CCR7,CTSS,GPR183,SELL	 
+NR1H3	 	ligand-dependent nuclear receptor	 	 	 	1.48E-03	ABCG1,ARL4C,CCR7,CD4,CYTH1,CYTIP,FAM3C,GRAP2,LCP2,TAP1,TLR1,VIPR1	 
+SASH1	 	other	Activated	2.828	bias	1.55E-03	CCND2,DAXX,IFIT1B,Iigp1,PELI1,SH3BP5,STAT1,TNFSF8	 
+TREX1	 	enzyme	 	 	 	1.61E-03	IFI16,IFIT1B,Ly6a (includes others)	 
+PTPN6	5.890	phosphatase	 	 	 	1.76E-03	CCR7,CD5,ETS1,IGHM	 
+CD3E	50.271	transmembrane receptor	 	 	 	1.79E-03	CD69,ITK,LCP2,PIK3CD,STK4,ZAP70	 
+IL2	 	cytokine	 	1.000	bias	1.89E-03	CD28,CD74,CFLAR,CXCR6,IFT80,IGFBP4,IKZF2,ITK,Ly6a (includes others),PECAM1,PELI1,SOCS3	 
+CD28	22.256	transmembrane receptor	Activated	2.412	bias	2.23E-03	CCND2,CCR9,CD27,CD69,CXCR6,GBP2,IL27RA,SOCS3	45 (4)
+CEBPB	 	transcription regulator	 	1.054	bias	2.64E-03	CCND2,CIRBP,CYB5A,DDX5,IRF9,LCP2,XIST	 
+POU2AF1	 	transcription regulator	 	 	 	2.73E-03	BTLA,CD69,KCNN4,LCK	 
+Cdc42	 	enzyme	Activated	2.000	bias	2.73E-03	CTSB,CTSS,MYH9,NPC2	 
+LDLR	 	transporter	 	 	 	2.84E-03	ABCG1,CD4,CYTH1,CYTIP,FAM3C,GRAP2,LCP2,PCYT2,TAP1,TLR1,VIPR1	 
+SIT1	9.099	other	 	 	 	2.99E-03	CD5,CD69	 
+TRAT1	 	kinase	 	 	 	2.99E-03	CD5,CD69	 
+Abcb1b	 	transporter	Inhibited	-2.000	bias	3.32E-03	HNRNPK,SLC11A2,TP53,USP28	 
+ABCB1	 	transporter	Inhibited	-2.000	bias	3.32E-03	HNRNPK,SLC11A2,TP53,USP28	 
+HDAC2	 	transcription regulator	Activated	2.236	 	3.70E-03	CD27,CD4,LAT,SATB1,THEMIS	 
+STAT5A	 	transcription regulator	 	0.555	bias	4.10E-03	CCND2,CFLAR,IL6R,IL6ST,IL7R,LTB,SOCS3,TGFBR2,TNFRSF25	 
+NFATC2	 	transcription regulator	Activated	2.530	bias	4.53E-03	CCR7,DAXX,IFIT1B,Iigp1,PELI1,SH3BP5,SLAMF6,SOCS3,STAT1,TNFSF8	 
+ARNT	 	transcription regulator	 	-1.131	bias	4.77E-03	ALDOA,CCR7,S1PR1,SELL	 
+CD22	 	transmembrane receptor	 	 	 	5.86E-03	CD5,ETS1	 
+NOTCH2	 	transcription regulator	 	 	 	5.86E-03	DTX1,IL7R	 
+RICTOR	 	other	 	 	 	7.31E-03	CD4,CD69,IL7R	 
+RUNX1	 	transcription regulator	 	 	 	7.31E-03	CD4,IL7R,Ly6a (includes others)	 
+RAG1	 	enzyme	 	 	 	7.31E-03	CD4,CD5,IGHM	 
+BATF	 	transcription regulator	 	 	 	7.31E-03	CCR9,IKZF2,IL17RA	 
+HDAC1	 	transcription regulator	Activated	2.236	 	7.67E-03	CD27,CD4,LAT,SATB1,THEMIS	 
+NR4A1	 	ligand-dependent nuclear receptor	 	-1.492	bias	8.66E-03	ATP5F1B,CD69,GPI,IDH2,IKZF2,NDUFA10,NDUFA3,PDHA1,PDK1	 
+SOX4	 	transcription regulator	 	1.134	bias	1.07E-02	CD53,IGFBP4,Ly6a (includes others),MGST2,PECAM1,ST6GAL1,TBXA2R	 
+MYD88	 	other	Activated	3.121	bias	1.14E-02	CFLAR,DAXX,IFIT1B,IKBKE,PDE4B,PLCG1,SAMHD1,SH3BP5,SOCS3,ZAP70	 
+MYCL	 	transcription regulator	Activated	2.646	bias	1.31E-02	COX7A2L,LUC7L3,Rbm25,RPL12,RPL13,RPL19,SLC25A4	 
+SHC1	 	other	 	 	 	1.40E-02	CCR7,S1PR1	 
+GNAI2	 	enzyme	 	 	 	1.40E-02	CCR7,SELL	 
+CBFA2T3	 	transcription regulator	 	 	 	1.40E-02	CCR9,CD4	 
+ZEB2	 	transcription regulator	 	-1.000	 	1.64E-02	IL7R,PLCG1,SELL,Tcf7	 
+MET	 	kinase	Activated	2.000	bias	1.64E-02	IFIT1B,SH3BP5,SOCS3,TNFSF8	 
+FYB1	11.258	other	 	 	 	1.92E-02	CD69,SKAP1	 
+ELL2	 	transcription regulator	Activated	2.236	bias	1.96E-02	EDEM1,IGHM,ITM2C,TENT5C,TMEM154	 
+EBF1	 	transcription regulator	 	 	 	2.15E-02	FOXO1,LEF1,Ly6a (includes others)	 
+GATA2	 	transcription regulator	 	 	 	2.47E-02	CD96,IL4R,Ly6a (includes others)	 
+RAG2	 	enzyme	 	 	 	2.51E-02	CD4,CD5	 
+IL12A	 	cytokine	 	 	 	2.51E-02	SOCS3,STAT1	 
+GATA3	 	transcription regulator	 	1.000	bias	2.96E-02	BCL11B,CD3D,CD3E,DTX1	 
+IKZF1	 	transcription regulator	 	-1.664	bias	3.08E-02	CCND2,DTX1,LCK,PRKCQ,RAPGEF4,SH3BP5	 
+LCP2	8.624	other	 	 	 	3.16E-02	FYB1,ID3	 
+CD38	 	enzyme	Activated	2.970	bias	3.18E-02	ALDOA,CCND2,GBP2,IL6R,ITGB7,PDK1,SELL,SOCS3,SPCS2	 
+KLF2	 	transcription regulator	 	 	 	3.18E-02	ITGB7,S1PR1,SELL	 
+SH2D2A	 	other	 	 	 	3.20E-02	LCK	 
+HLX	 	transcription regulator	 	 	 	3.20E-02	IL4R	 
+SOS2	 	other	 	 	 	3.20E-02	SELL	 
+BLNK	 	other	 	 	 	3.20E-02	FOXO1	 
+NOTCH3	 	transcription regulator	 	 	 	3.20E-02	PRKCQ	 
+DDIT4	 	other	 	 	 	3.20E-02	TP53	 
+CUL3	 	enzyme	 	 	 	3.20E-02	OGT	 
+SOS1	 	other	 	 	 	3.20E-02	SELL	 
+EFNB1	 	other	 	 	 	3.20E-02	IL7R	 
+AFF1	 	transcription regulator	 	 	 	3.20E-02	CD4	 
+SIGLEC10	 	other	 	 	 	3.20E-02	ETS1	 
+TBP	 	transcription regulator	 	 	 	3.20E-02	CD3E	 
+BIRC5	 	other	 	 	 	3.20E-02	TP53	 
+BRCA1	 	transcription regulator	 	 	 	3.20E-02	TP53	 
+EFNB2	 	kinase	 	 	 	3.20E-02	IL7R	 
+PPP5C	 	phosphatase	 	 	 	3.20E-02	TP53	 
+FURIN	 	peptidase	 	 	 	3.20E-02	IL4R	 
+BACH2	 	transcription regulator	Activated	2.000	 	3.23E-02	FOXO1,ID3,LEF1,SATB1	 
+Esrra	 	transcription regulator	 	-1.067	 	3.51E-02	ALDOA,ATP5F1B,COX7A2L,PDK1	 
+IL7	 	cytokine	 	 	 	3.58E-02	IGHM,IL7R,PIK3IP1	 
+IL7R	54.028	transmembrane receptor	 	 	 	3.87E-02	CD5,IGHM	 
+Brd4	 	kinase	 	 	 	3.99E-02	LCK,RASSF2,TNFSF8	 
+BCL6	 	transcription regulator	Inhibited	-2.236	bias	4.19E-02	CCND2,CD69,IL4R,IL7R,Ly6a (includes others),STAT1,TP53,UBA7	 
+PRDM1	 	transcription regulator	 	 	 	4.43E-02	IGHM,IL7R,SELL	 
+NR3C1	 	ligand-dependent nuclear receptor	 	 	 	4.44E-02	GBP2,IFIT1B,IL7R,TSC22D3	 
+CEBPA	 	transcription regulator	 	 	 	4.63E-02	Ly6a (includes others),PIK3CD	 
+CISH	 	other	 	-0.447	bias	4.77E-02	ID3,MPP1,PECAM1,RGCC,Tcf7	 

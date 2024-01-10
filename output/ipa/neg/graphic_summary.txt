@@ -1,0 +1,36 @@
+© 2000-2021 QIAGEN. All rights reserved.
+Symbol	Synonym(s)	Entrez Gene Name	Entrez Gene/Gene Symbol - mouse (Entrez Gene)	Expr Fold Change	Expr p-value	Location	Family	Drugs	Entrez Gene ID for Human	Entrez Gene ID for Mouse	Entrez Gene ID for Rat	
+Antigen presentation						Other	function					
+BCL6	B cell leukaemia/lymphoma 6, B cell leukemia/lymphoma 6, BCL5, BCL6A, BCL6 transcription repressor, BCL6, transcription repressor, LAZ3, ZBTB27, zinc finger protein 51, ZNF51	BCL6 transcription repressor				Nucleus	transcription regulator		604	12053	303836	
+Binding of lymphatic system cells						Other	function					
+CD28	CD28 ANTIGEN, CD28I, CD28 molecule, CD28RNA, LOC100048845, Tp44	CD28 molecule	Cd28	22.2564868061984	0.109757153939874	Plasma Membrane	transmembrane receptor	lulizumab pegol, FPT155, REGN5678	940	12487	25660	
+CD28 Signaling in T Helper Cells						Other	canonical pathway					
+CD38	ADPRC 1, ADP-ribosyl cyclase 1, CD38 ANTIGEN, CD38 molecule, Cd38-rs1, I-19	CD38 molecule				Plasma Membrane	enzyme	TAK-079, TAK-573, anti-CD38 antibody, anti-CD38 monoclonal antibody, isatuximab, daratumumab, MOR03087	952	12494	25668	
+Cell viability of T lymphocytes						Other	function					
+Clonal expansion of T lymphocytes						Other	function					
+DOCK8	1200017A24RIK, 5830472H07RIK, A130095G14RIK, AI461977, dedicator of cytokinesis 8, HEL-205, MRD2, ZIR8	dedicator of cytokinesis 8				Cytoplasm	other		81704	76088	499337	
+ETS1	AI196000, AI448617, c-ets-1, D230050P06, E26 avian leukaemia oncogene 1, 5' domain, E26 avian leukemia oncogene 1, 5' domain, Etsoncb, ETS proto-oncogene 1, transcription factor, EWSR2, p42 ETS1, p54, TPL1, v-Ets, vs	ETS proto-oncogene 1, transcription factor	Ets1	64.5733891973032	0.42092575058046	Nucleus	transcription regulator		2113	23871	24356	
+Expansion of lymphocytes						Other	function					
+Expansion of T lymphocytes						Other	function					
+Formation of thymocytes						Other	function					
+GFI1	AW495828, GFI1A, growth factor independent 1 transcriptional repressor, growth factor independent 1 transcription repressor, Pal-1, SCN2, ZNF163	growth factor independent 1 transcriptional repressor				Nucleus	transcription regulator		2672	14581	24388	
+Homeostasis of leukocytes						Other	function					
+iCOS-iCOSL Signaling in T Helper Cells						Other	canonical pathway					
+IFNG	IFG, IFI, IFN-2, IFNG2, IFN gamma, IFN-II, IFN type II, IFN-γ, INF-γ, Interferon gamma, Interferon γ, type II INTERFERON, γ-ifn, γ interferon	interferon gamma				Extracellular Space	cytokine	emapalumab	3458	15978	25712	
+IL10RA	AW553859, CD210, CD210a, CDw210, CDW210A, HIL-10R, IL10R, IL-10R1, IL-10 Ralpha, IL-10 Rα, interleukin 10 receptor, alpha, interleukin 10 receptor subunit alpha, interleukin 10 receptor subunit α, interleukin 10 receptor, α, mIL-10R	interleukin 10 receptor subunit alpha				Plasma Membrane	transmembrane receptor		3587	16154	117539	
+IRF3	C920001K05RIK, DRAFB, Ifn regulatory factor 3, IIAE7, interferon regulatory factor 3	interferon regulatory factor 3				Nucleus	transcription regulator		3661	54131	292892	
+IRF7	IFNRG7A, IMD39, interferon regulatory factor 7, IRF7A, IRF7C, IRF-7H	interferon regulatory factor 7				Nucleus	transcription regulator		3665	54123	293624	
+LCK	Hck-3, IMD22, Lck1, LCK proto-oncogene, Src family tyrosine kinase, Lcktkr, LSK, Lskt, lymphocyte protein tyrosine kinase, p56Lck, pp58lck, YT16	LCK proto-oncogene, Src family tyrosine kinase	Lck	17.4634871606213	0.543045995522409	Cytoplasm	kinase	blinatumomab/dasatinib, lapatinib/pazopanib, dasatinib/filgrastim, JNJ-26483327, dacomitinib, pazopanib, dasatinib/rituximab, crizotinib/pazopanib, docetaxel/nintedanib, dasatinib/nilotinib, dasatinib/erlotinib, nintedanib, dasatinib/inotuzumab ozogamicin, dasatinib, afatinib/dasatinib	3932	16818	313050	
+Lymphopoiesis						Other	function					
+Maturation of lymphocytes						Other	function					
+NFATC2	AI607462, NFAT1, NFAT1-D, NF-ATp, nuclear factor of activated T-cells 2, nuclear factor of activated T cells, cytoplasmic, calcineurin dependent 2	nuclear factor of activated T cells 2				Nucleus	transcription regulator		4773	18019	311658	
+Proliferation of thymocytes						Other	function					
+Quantity of mononuclear leukocytes						Other	function					
+Quantity of T lymphocytes						Other	function					
+SAMSN1	4930571B16Rik, 930571B16Rik, HACS1, Nash, NASH1, SAM domain, SH3 domain and nuclear localization signals 1, SAM domain, SH3 domain and nuclear localization signals, 1, SASH2, SH3D6B, SLy2	SAM domain, SH3 domain and nuclear localization signals 1				Nucleus	other		64092	67742	170637	
+SASH1	1100001C18Rik, 2500002E12RIK, A330076K04Rik, CAPOK, dJ323M4.1, DUH1, FLJ13545, Image:1396616, mKIAA0790, RGD1566017, SAM and SH3 domain containing 1, SH3D6A	SAM and SH3 domain containing 1				Extracellular Space	other		23328	70097	365037	
+SOCS1	CIS1, CISH1, Cish7, JAB, JBP, Sosc1, SSI-1, STAT INDUCED STAT INHIBITOR-1, suppressor of cytokine signaling 1, TIP-3	suppressor of cytokine signaling 1				Cytoplasm	other		8651	12703	252971	
+STAT1	2010005J02Rik, AA408197, CANDF7, DD6G4-4, IMD31A, IMD31B, IMD31C, ISGF-3, p91, signal transducer and activator of transcription 1, STAT1 alpha, Stat1 beta, Stat1 p91, STAT1 α, Stat1 β, STAT91, TRANSCRIPTION FACTOR SIGNAL TRANSDUCER and ACTIVATOR	signal transducer and activator of transcription 1	Stat1	27.6103919481954	0.999999809769497	Nucleus	transcription regulator		6772	20846	25124	
+T cell development						Other	function					
+T cell homeostasis						Other	function					
+TBX21	T-BET, TBLYM, T-box 21, T-box transcription factor 21, TBT1, T-PET	T-box transcription factor 21				Nucleus	transcription regulator		30009	57765	303496	

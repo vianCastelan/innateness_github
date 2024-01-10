@@ -1,0 +1,93 @@
+© 2000-2021 QIAGEN. All rights reserved. USE OF THIS CONTENT IS SUBJECT TO THE TERMS OF YOUR IPA END USER LICENSE AGREEMENT
+From Molecule(s)	Relationship Type	To Molecule(s)	Catalyst(s)	
+BCL6	expression	IL18		
+BCL6	expression	IL4		
+BCL6	expression	IL5		
+BCL6	expression	STAT1		
+CD28	expression	IFNG		
+CD28	expression	IL4		
+CD28	expression	IL5		
+CD28	expression	TBX21		
+CD28	expression	TNF		
+CD28	transcription	IL4		
+CD38	expression	BCL6		
+CD38	inferred causation	IL5		
+CD40	expression	IFNG		
+CD40	expression	TNF		
+CISH	expression	IFNG		
+CISH	expression	IL4		
+CISH	expression	TBX21		
+CISH	expression	TNF		
+CISH	inferred causation	Natural Killer Cell Signaling		
+CREBBP	expression	IFNG		
+CREBBP	inferred causation	CISH		
+CREBBP	inferred causation	TBX21		
+Cytotoxicity of leukocytes	inferred causation	NK cell proliferation		
+Cytotoxicity of lymphocytes	inferred causation	Cytotoxicity of T lymphocytes		
+Cytotoxicity of lymphocytes	inferred causation	Cytotoxicity of leukocytes		
+Development of innate lymphoid cells	inferred causation	NK cell development		
+Differentiation of B lymphocytes	inferred causation	Lymphopoiesis		
+Fcγ Receptor-mediated Phagocytosis in Macrophages and Monocytes	inferred causation	Natural Killer Cell Signaling		
+IFNG	activation	STAT1		
+IFNG	expression	CD40		
+IFNG	expression	IL15		
+IFNG	expression	IL4		
+IFNG	expression	IL5		
+IFNG	expression	SPI1		
+IFNG	expression	STAT1		
+IFNG	expression	TBX21		
+IFNG	expression	TNF		
+IFNG	expression	VEGFA		
+IFNG	phosphorylation	STAT1		
+IL10RA	expression	STAT1		
+IL15	expression	CD40		
+IL18	expression	IFNG		
+IL18	expression	IL4		
+IL18	expression	IL5		
+IL18	expression	TNF		
+IL4	expression	IFNG		
+IL4	expression	IL5		
+IL4	expression	TNF		
+IL5	expression	BCL6		
+IL5	expression	IL4		
+ITK	expression	IFNG		
+ITK	expression	IL4		
+ITK	expression	IL5		
+ITK	expression	TBX21		
+ITK	expression	TNF		
+ITK	localization	TNF		
+ITK	transcription	IL4		
+ITK	transcription	IL5		
+Integrin Signaling	inferred causation	Actin Cytoskeleton Signaling		
+Integrin Signaling	inferred causation	Signaling by Rho Family GTPases		
+MYD88	expression	CD38		
+MYD88	expression	CD40		
+MYD88	expression	IFNG		
+MYD88	expression	IL18		
+MYD88	expression	IL4		
+MYD88	expression	TBX21		
+MYD88	expression	TNF		
+MYD88	phosphorylation	STAT1		
+NK cell development	inferred causation	NK cell homeostasis		
+NK cell development	inferred causation	NK cell proliferation		
+Natural Killer Cell Signaling	inferred causation	Lymphopoiesis		
+Response of mononuclear leukocytes	inferred causation	Cytotoxicity of leukocytes		
+Response of mononuclear leukocytes	inferred causation	Immune response of T lymphocytes		
+Response of mononuclear leukocytes	inferred causation	Response of lymphatic system cells		
+STAT1	expression	CD40		
+STAT1	expression	IFNG		
+STAT1	expression	IL15		
+STAT1	expression	IL18		
+STAT1	expression	TBX21		
+STAT1	expression	TNF		
+STAT1	inferred causation	NK cell proliferation		
+Stimulation of lymphocytes	inferred causation	Lymphopoiesis		
+Stimulation of lymphocytes	inferred causation	Response of mononuclear leukocytes		
+TBX21	expression	IFNG		
+TNF	expression	CD40		
+TNF	expression	IFNG		
+TNF	expression	IL4		
+Tec Kinase Signaling	inferred causation	Natural Killer Cell Signaling		
+Tec Kinase Signaling	inferred causation	Phospholipase C Signaling		
+Tec Kinase Signaling	inferred causation	Signaling by Rho Family GTPases		
+VEGFA	inferred causation	Integrin Signaling		

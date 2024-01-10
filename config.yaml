@@ -1,0 +1,21 @@
+---
+innate_dir: 
+        local: /Volumes/bioadhoc-temp/Groups/KronenbergLab/gascui/innateness_github
+        server: /mnt/bioadhoc-temp/Groups/KronenbergLab/gascui/innateness_github
+innate_output: 
+        local: /Volumes/bioadhoc-temp/Groups/KronenbergLab/gascui/innateness_github/output
+        server: /mnt/bioadhoc-temp/Groups/KronenbergLab/gascui/innateness_github/output
+beta_cut: 10
+pval_cut: 0.05
+n_mvg: 1000
+organisms: 
+    - mouse
+    - human
+test_data: 
+        goldrath: data/test_data/master_rpmk_table_goldrath_lab.tsv
+        isaac: data/test_data/GSE157225_counts.tsv
+        flavell: data/test_data/master_rpmk_table_flavell_lab.tsv
+        salmonella:
+        efergusonii:
+        
+...
