@@ -1,1 +1,7 @@
 data/
+.Rproj.user
+.RData
+.Rhistory
+test.yaml
+output/figures/.DS_Store
+output/b_levels/beta_lmm.rds

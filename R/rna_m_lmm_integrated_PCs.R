@@ -51,13 +51,20 @@ sampleDists <- dist(t(assay(vsd)))
 sampleDistMatrix <- as.matrix(sampleDists)
 rownames(sampleDistMatrix) <- vsd$all_conditions
 colnames(sampleDistMatrix) <- NULL
-ntop <- config$n_mvg #number of MVG to take (1000 as default)
+ntop <- config$n_mvg #number of MVG to take (1000 as default) ## ntop <- 1000
 rv <- rowVars(assay(vsd))
 select <- order(rv, decreasing = TRUE)[seq_len(min(ntop, length(rv)))]
 mat <- t(assay(vsd)[select, ])
 pca<-prcomp(mat,scale= TRUE)
-save(pca, file = "data/pca.RData")
 pc_coord <- as.data.frame(pca$x[,])
+## integrated PC coordinates
+percentVar <- round(100 * pca$sdev^2/sum(pca$sdev^2))
+percentVar
+m <- 4
+iscore <- sqrt((rowSums(pc_coord[,1:m]))^2*percentVar)
+iscore
+plot(x = as.factor(col_data$cell_type), y = iscore)
+
 cat("PC coordinates have been generated...","\n")
 ##########################################  filter samples ########################################## 
 col_data <- col_data[rownames(col_data) %in% row.names(pc_coord),] ## filter col_data for samples in pc_coord

@@ -6,8 +6,8 @@
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=100g
 #SBATCH --time=80:00:00
-#SBATCH --output=/mnt/bioadhoc-temp/Groups/KronenbergLab/%u/slurm_logs/job-%j.out
-#SBATCH --error=/mnt/bioadhoc-temp/Groups/KronenbergLab/%u/slurm_logs/job-%j.err
+#SBATCH --output=/mnt/bioadhoc/Groups/KronenbergLab/%u/slurm_logs/job-%j.out
+#SBATCH --error=/mnt/bioadhoc/Groups/KronenbergLab/%u/slurm_logs/job-%j.err
 #SBATCH --mail-type=ALL
 
 ###############################
@@ -39,7 +39,7 @@ echo "sig. beta level: $beta";
 if [ $species == 'mouse' ]
 then
     echo "initiating Rscript"
-    Rscript R/rna_m_lmm.R
+    Rscript R/rna_m_lmm.R $pval $beta
     if [ $atac == 'y' ]
     then
         echo "running ATAC-seq analysis as well"

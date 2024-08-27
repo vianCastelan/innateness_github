@@ -1,10 +1,10 @@
 ---
 innate_dir: 
-        local: /Volumes/bioadhoc-temp/Groups/KronenbergLab/gascui/innateness_github
-        server: /mnt/bioadhoc-temp/Groups/KronenbergLab/gascui/innateness_github
+        local: /Volumes/BioAdHoc/Groups/KronenbergLab/gascui/innateness/innateness_github
+        server: /mnt/BioAdHoc/Groups/KronenbergLab/gascui/innateness/innateness_github
 innate_output: 
-        local: /Volumes/bioadhoc-temp/Groups/KronenbergLab/gascui/innateness_github/output
-        server: /mnt/bioadhoc-temp/Groups/KronenbergLab/gascui/innateness_github/output
+        local: /Volumes/BioAdHoc/Groups/KronenbergLab/gascui/innateness/innateness_github/output
+        server: /mnt/BioAdHoc/Groups/KronenbergLab/gascui/innateness/innateness_github/output
 beta_cut: 10
 pval_cut: 0.05
 n_mvg: 1000

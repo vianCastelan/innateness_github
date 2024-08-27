@@ -1,0 +1,32 @@
+---
+title: "model_equation"
+author: "Gabriel Ascui"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(lme4)
+# install.packages("equatiomatic") 
+library(equatiomatic)
+```
+
+## Load models
+
+```{r load_data}
+beta_lmm <- readRDS("output/b_levels/")
+```
+
+## Equation
+
+```{r equation}
+# Give the results to extract_eq
+extract_eq(beta_lmm$gene100001, wrap = TRUE)
+
+```
+
+```{r summary}
+summary(beta_lmm$gene100001)
+```
+

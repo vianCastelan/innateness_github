@@ -101,3 +101,30 @@ barcan_plot <- function(can = canonical, cluster = 1) {
     geom_col(fill=parameters$colors[cnms[cluster],],col="black") + coord_flip() + theme_classic()
   return(p)
 }
+
+
+################################              Other Functions              #########################################
+# Function to convert strings from ALL CAPS to First Cap
+to_first_cap <- function(s) {
+  s <- tolower(s)
+  s <- strsplit(s, " ")[[1]]
+  s <- paste(toupper(substring(s, 1, 1)), substring(s, 2), sep="", collapse=" ")
+  return(s)
+}
+
+# Function to remove content between parentheses
+remove_parentheses <- function(s) {
+  return(gsub("\\(.*?\\)", "", s))
+}
+
+# Function to process the input string
+process_string <- function(input) {
+  # Split the input string by comma
+  parts <- strsplit(input, ",")[[1]]
+  # Apply the transformations
+  parts <- sapply(parts, function(x) to_first_cap(remove_parentheses(trimws(x))))
+  parts <- unname(parts)
+  return(parts)
+}
+
+
